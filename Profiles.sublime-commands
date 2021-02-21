@@ -1,0 +1,10 @@
+[
+    {
+        "caption": "Profiles: Create Profile",
+        "command": "create_profile"
+    },
+    {
+        "caption": "Profiles: Switch Profile",
+        "command": "switch_profile"
+    }
+]
