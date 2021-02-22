@@ -1,5 +1,7 @@
 # Profile switcher for Sublime Text
 
+![](profiles.gif)
+
 ## Installation
 
 `Package Control: Install Package` → `Profile Switcher`.
@@ -15,6 +17,7 @@
 - Each profile remembers all the settings: font, scheme, line metrics, gutter, etc.
 - Any number of profiles.
 - Instant switching.
+- Minimal (“automagical”) UI.
 
 ## How does it work?
 

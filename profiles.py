@@ -2,7 +2,8 @@ import os, re, shutil, sublime, sublime_plugin
 
 package_name = 'sublime-profiles'
 base_path = os.path.join(sublime.packages_path(), package_name, 'Data')
-current_profile_path = os.path.join(base_path, 'current_profile')
+current_profile_path = os.path.join(base_path, 'current')
+previous_profile_path = os.path.join(base_path, 'previous')
 preferences_path = os.path.join(sublime.packages_path(), 'User', 'Preferences.sublime-settings')
 
 def current_profile():
@@ -14,10 +15,9 @@ def current_profile():
 
 def profiles():
     items = {current_profile()}
-    for path in sublime.find_resources(''):
-        match = re.match("^Packages/" + package_name + "/Data/([^/]+)\\.sublime-settings$", path)
-        if match:
-            items.add(match.group(1))
+    for path in os.listdir(base_path):
+        if path.endswith('.profile'):
+            items.add(path[:-len('.profile')])
     return sorted(items)
 
 class CreateProfileInputHandler(sublime_plugin.TextInputHandler):
@@ -33,18 +33,20 @@ class CreateProfileInputHandler(sublime_plugin.TextInputHandler):
         text = text.strip().lower()
         return bool(text and text not in [p.lower() for p in profiles()])
 
-def save_and_set(profile):
-    # Save current
-    shutil.copyfile(preferences_path, os.path.join(base_path, current_profile() + ".sublime-settings"))
-
-    # Save new current name
-    os.makedirs(base_path, exist_ok=True)
-    with open(current_profile_path, "w") as file:
-      file.write(profile)
-
 class CreateProfileCommand(sublime_plugin.ApplicationCommand):
     def run(self, create_profile):
-        save_and_set(create_profile)
+        os.makedirs(base_path, exist_ok=True)
+
+        # Save current
+        shutil.copyfile(preferences_path, os.path.join(base_path, current_profile() + ".profile"))
+
+        # Save old current to previous
+        with open(previous_profile_path, "w") as file:
+          file.write(current_profile())
+
+        # Save new current name
+        with open(current_profile_path, "w") as file:
+          file.write(create_profile)
 
     def input(self, args):
         return CreateProfileInputHandler()
@@ -65,11 +67,11 @@ class SwitchProfileInputHandler(sublime_plugin.ListInputHandler):
 
 class SwitchProfileCommand(sublime_plugin.ApplicationCommand):
     def run(self, switch_profile):
-        save_and_set(switch_profile)
+        CreateProfileCommand().run(switch_profile)
 
         # Load target profile
         switch_profile = switch_profile.strip("→ ")
-        switch_profile_path = os.path.join(base_path, switch_profile + '.sublime-settings')
+        switch_profile_path = os.path.join(base_path, switch_profile + '.profile')
         shutil.copyfile(switch_profile_path, preferences_path)
 
         # Remove old copy of new current
@@ -77,3 +79,16 @@ class SwitchProfileCommand(sublime_plugin.ApplicationCommand):
 
     def input(self, args):
         return SwitchProfileInputHandler()
+
+    def is_enabled(self):
+        return len(profiles()) > 1
+
+class ToggleProfileCommand(sublime_plugin.ApplicationCommand):
+    def run(self):
+        if os.path.exists(previous_profile_path):
+            with open(previous_profile_path) as file:
+                previous_profile = file.read().strip()
+            SwitchProfileCommand().run(previous_profile)
+
+    def is_enabled(self):
+        return os.path.exists(previous_profile_path)

@@ -6,5 +6,9 @@
     {
         "caption": "Profiles: Switch Profile",
         "command": "switch_profile"
+    },
+    {
+        "caption": "Profiles: Toggle Last Used Profile",
+        "command": "toggle_profile"
     }
 ]
