@@ -1,5 +1,7 @@
 # Profile Switcher for Sublime Text
 
+![](screenshots/logo.png)
+
 ![](screenshots/demo.gif)
 
 ## Problem
