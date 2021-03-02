@@ -1,14 +1,22 @@
 [
     {
-        "caption": "Profiles: Create Profile",
+        "caption": "Profiles: Create",
         "command": "create_profile"
     },
     {
-        "caption": "Profiles: Switch Profile",
+        "caption": "Profiles: Switch",
         "command": "switch_profile"
     },
     {
-        "caption": "Profiles: Toggle Last Used Profile",
+        "caption": "Profiles: Rename",
+        "command": "rename_profile"
+    },
+    {
+        "caption": "Profiles: Delete",
+        "command": "delete_profile"
+    },
+    {
+        "caption": "Profiles: Toggle Last Used",
         "command": "toggle_profile"
     }
 ]

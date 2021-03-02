@@ -61,6 +61,12 @@ Inactive profiles are stored in `~/Library/Application Support/Sublime Text/Pack
 
 [Fira Code](https://github.com/tonsky/FiraCode/): Best coding font in the world.
 
+## Changelog
+
+1.1.0 Mar 2, 2021: Added `Rename` and `Delete` commands.
+
+1.0.0 Feb 22, 2021: Initial.
+
 ## Credits
 
 Made by [Niki Tonsky](https://twitter.com/nikitonsky).
