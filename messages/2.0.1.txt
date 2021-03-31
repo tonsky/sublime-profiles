@@ -1,6 +1,6 @@
 Hi!
 
-If you were using Switch Settings, it is not replaced with Profile Switcher. Feature-wise Profile Switcher is the same, but I hope it provides a much smoother user experience. For example, restart is no longer required.
+If you were using Switch Settings, it is now replaced with Profile Switcher. Feature-wise Profile Switcher is the same, but I hope it provides a much smoother user experience. For example, restart is no longer required.
 
 New commands:
 
