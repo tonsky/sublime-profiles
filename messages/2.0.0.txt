@@ -1,0 +1,11 @@
+Hi!
+
+If you were using Switch Settings, it is not replaced with Profile Switcher. Feature-wise Profile Switcher is the same, but I hope it provides a much smoother user experience. For example, restart is no longer required.
+
+New commands:
+
+- Profiles: Create (`create_profile`)
+- Profiles: Switch (`switch_profile`)
+- Profiles: Rename (`rename_profile`)
+- Profiles: Delete (`delete_profile`)
+- Profiles: Toggle Last Used (`toggle_profile`)
