@@ -25,9 +25,10 @@ def profile_path(name):
 
 def profiles():
     items = {current_profile()}
-    for path in os.listdir(base_path):
-        if path.endswith('.profile'):
-            items.add(path[:-len('.profile')])
+    if os.path.exists(base_path):
+        for path in os.listdir(base_path):
+            if path.endswith('.profile'):
+                items.add(path[:-len('.profile')])
     return sorted(items)
 
 
