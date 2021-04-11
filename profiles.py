@@ -1,10 +1,13 @@
 import os, re, shutil, sublime, sublime_plugin
 
 package_name = 'sublime-profiles'
-base_path = os.path.join(sublime.packages_path(), package_name, 'Data')
-current_profile_path = os.path.join(base_path, 'current')
-previous_profile_path = os.path.join(base_path, 'previous')
-preferences_path = os.path.join(sublime.packages_path(), 'User', 'Preferences.sublime-settings')
+
+def plugin_loaded():
+    global base_path, current_profile_path, previous_profile_path, preferences_path
+    base_path = os.path.join(sublime.packages_path(), package_name, 'Data')
+    current_profile_path = os.path.join(base_path, 'current')
+    previous_profile_path = os.path.join(base_path, 'previous')
+    preferences_path = os.path.join(sublime.packages_path(), 'User', 'Preferences.sublime-settings')
 
 def current_profile():
     if os.path.exists(current_profile_path):
